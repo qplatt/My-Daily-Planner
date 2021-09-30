@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h2>I've extended the base template!</h2>
     {% for plan in plans %}
         {{ plan.plan_name }}<br>
         {{ plan.section_name }}<br>
