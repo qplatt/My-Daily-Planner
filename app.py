@@ -20,8 +20,8 @@ mongo = PyMongo(app)
 @app.route("/")
 
 
-@app.route("/get_tasks")
-def get_tasks():
+@app.route("/get_plans")
+def get_plans():
     plans = mongo.db.plans.find()
     return render_template("plans.html", plans=plans)
 
