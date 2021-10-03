@@ -22,7 +22,7 @@
 				<ul class="right hide-on-med-and-down">
 					<li><a href="{{ url_for('get_plans') }}">Home</a></li>
 					<li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-					<li><a href="#">Login</a></li>
+					<li><a href="{{ url_for('login') }}">Login</a></li>
 					<li><a href="#">Dashboard</a></li>
 					<li><a href="#">New Plan</a></li>
 					<li><a href="#">Log In</a></li>
@@ -36,7 +36,7 @@
             <li><h4 class="center-align indigo-text text-accent-4">Task Manager</h4></li>
             <li><a href="{{ url_for('get_plans') }}">Home</a></li>
 				<li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-				<li><a href="#">Login</a></li>
+				<li><a href="{{ url_for('login') }}">Login</a></li>
 				<li><a href="#">Dashboard</a></li>
 				<li><a href="#">New Plan</a></li>
 				<li><a href="#">Log In</a></li>
@@ -50,7 +50,7 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="row flashes">
-                        <h4 class="indigo accent-4 center-align">{{ message }}</h4>
+                        <h4 class="green accent-2 center-align">{{ message }}</h4>
                     </div>
                 {% endfor %}
             {% endif %}
