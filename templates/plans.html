@@ -1,27 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-    {% for plan in plans %}
-        {{ plan.plan_name }}<br>
-        {{ plan.section_name }}<br>
-        {{ plan.description }}<br>
-        {{ plan.is_urgent }}<br>
-        {{ plan.end_date }}<br>
-    {% endfor %}
-
     <ul class="collapsible">
+        {% for plan in plans %}
         <li>
-          <div class="collapsible-header white-text cyan lighten-5 text-shadow"><i class="fas fa-arrow-down"></i>First</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          <div class="collapsible-header white-text cyan lighten-3">
+              <i class="fas fa-arrow-down"></i>
+              <strong>{{ plan.plan_name }}</strong> : {{ plan.end_date }}
+              {% if plan.is_urgent == "on" %}
+                <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
+                    data-position="right" data-tooltip="URGENT!">
+                </i>
+              {% endif %}
+            </div>
+          <div class="collapsible-body">
+            <strong>{{ plan.section_name }}</strong>
+            <p>{{ plan.description }}</p>
+            </div>
         </li>
-        <li>
-          <div class="collapsible-header white-text cyan lighten-5 text-shadow"><i class="fas fa-arrow-down"></i>Second</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header white-text cyan lighten-5 text-shadow"><i class="fas fa-arrow-down"></i>Third</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
+        {% endfor %}
       </ul>
 
 {%endblock %}
