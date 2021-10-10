@@ -98,8 +98,23 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_plan")
+@app.route("/add_plan", methods=["GET", "POST"])
 def add_plan():
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        plan = {
+            "section_name": request.form.get("section_name"),
+            "plan_name": request.form.get("plan_name"),
+            "plan_description": request.form.get("plan_description"),
+            "is_urgent": is_urgent,
+            "end_date": request.form.get("end_date"),
+            "created_by": session["user"]
+            }
+        
+        mongo.db.plans.insert_one(plan)
+        flash("Plan Successfuly Added!")
+        return redirect(url_for("dashboard"))
+
     sections = mongo.db.sections.find().sort("section_name", 1)
     return render_template("add_plan.html", sections=sections)
 

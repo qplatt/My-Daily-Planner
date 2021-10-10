@@ -1,24 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 
+    <h3 class="indigo-text text-accent-4 center-align">All Plans</h3>
+
     <ul class="collapsible">
         {% for dash in dashboard %}
         <li>
-          <div class="collapsible-header white-text cyan lighten-3">
+          <div class="collapsible-header white-text deep-purple accent-3">
               <i class="fas fa-arrow-down"></i>
               <strong>{{ dash.plan_name }}</strong> : {{ dash.end_date }}
               {% if dash.is_urgent == "on" %}
-                <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
+                <i class="fas fa-exclamation-circle white-text tooltipped"
                     data-position="right" data-tooltip="URGENT!">
                 </i>
               {% endif %}
             </div>
-          <div class="collapsible-body">
-            <strong>{{ dash.section_name }}</strong>
-            <p>{{ dash.description }}</p>
-            </div>
-        </li>
-        {% endfor %}
-      </ul>
+            <div class="collapsible-body">
+              <strong>{{ dash.section_name }}</strong>
+              <p>{{ dash.plan_description }}</p>
+              <p><em>by: {{ dash.created_by }}</em></p>
+          </div>
+      </li>
+      {% endfor %}
+    </ul>
 
 {%endblock %}
