@@ -100,7 +100,8 @@ def logout():
 
 @app.route("/add_plan")
 def add_plan():
-    return render_template("add_plan.html")
+    sections = mongo.db.sections.find().sort("section_name", 1)
+    return render_template("add_plan.html", sections=sections)
 
 
 if __name__ == "__main__":
