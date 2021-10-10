@@ -1,25 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h3 class="demo center-align">Demo</h3>
-
-  <h4 class="demo center-align">Interested in My Daily Planner? <a href="{{ url_for('signup') }}">Sign up</a> today!</h2>
-
     <ul class="collapsible">
-        {% for plan in plans %}
+        {% for dash in dashboard %}
         <li>
           <div class="collapsible-header white-text cyan lighten-3">
               <i class="fas fa-arrow-down"></i>
-              <strong>{{ plan.plan_name }}</strong> : {{ plan.end_date }}
-              {% if plan.is_urgent == "on" %}
+              <strong>{{ dash.plan_name }}</strong> : {{ dash.end_date }}
+              {% if dash.is_urgent == "on" %}
                 <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
                     data-position="right" data-tooltip="URGENT!">
                 </i>
               {% endif %}
             </div>
           <div class="collapsible-body">
-            <strong>{{ plan.section_name }}</strong>
-            <p>{{ plan.description }}</p>
+            <strong>{{ dash.section_name }}</strong>
+            <p>{{ dash.description }}</p>
             </div>
         </li>
         {% endfor %}

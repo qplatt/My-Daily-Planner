@@ -104,6 +104,12 @@ def add_plan():
     return render_template("add_plan.html", sections=sections)
 
 
+@app.route("/dashboard")
+def dashboard():
+    dashboard = list(mongo.db.plans.find())
+    return render_template("dashboard.html", dashboard=dashboard)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
