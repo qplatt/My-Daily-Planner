@@ -1,27 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h3 class="demo center-align">Demo</h3>
-
-  <h4 class="demo center-align">Interested in My Daily Planner? <a href="{{ url_for('signup') }}">Sign up</a> today!</h2>
+    <h3 class="light-blue-text text-darken-4 center-align">All Plans</h3>
 
     <ul class="collapsible">
         {% for plan in plans %}
         <li>
-          <strong>{{ plan.plan_name }}</strong> : {{ plan.due_date }}
+            <div class="collapsible-header white-text indigo accent-4 text-shadow">
+                <div class="col s3">
+                    <i class="fas fa-caret-down"></i>
+                    <a href="" class="btn-small pink lighten-2">Done</a>
+                    <a href="" class="btn-small green lighten-3">Edit</a>
+                </div>
+                <div class="col s9">
+                    <strong>{{ plan.plan_name }}</strong> : {{ plan.due_date }}
                     {% if plan.is_urgent == "on" %}
-                        <i class="fas fa-exclamation-circle white-text tooltipped"
+                        <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
                             data-position="right" data-tooltip="URGENT!"></i>
                     {% endif %}
                 </div>
             </div>
             <div class="collapsible-body">
-                <strong>{{ plan.section_name }}</strong>
+                <strong>{{ plan.category_name }}</strong>
                 <p>{{ plan.plan_description }}</p>
                 <p><em>by: {{ plan.created_by }}</em></p>
             </div>
         </li>
         {% endfor %}
-      </ul>
+    </ul>
 
-{%endblock %}
+{% endblock %}

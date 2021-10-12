@@ -7,6 +7,11 @@
    line-height: 2;
 }
 
-.demo {
-    font-family:Georgia, 'Times New Roman', Times, serif
+.btn-small {
+    margin: 5px;
+}
+
+.collapisble-header .col strong {
+    margin: 5px; 
+    line-height: 42px;
 }
