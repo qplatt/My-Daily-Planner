@@ -19,12 +19,6 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_plans")
-def get_plans():
-    plans = list(mongo.db.plans.find())
-    return render_template("plans.html", plans=plans)
-
-
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -121,6 +115,21 @@ def add_plan():
 
 @app.route("/edit_plan/<dash_id>", methods=["GET", "POST"])
 def edit_plan(dash_id):
+
+    if request.method == "POST":
+        is_urgent = "on" if request.form.get("is_urgent") else "off"
+        submit = {
+            "section_name": request.form.get("section_name"),
+            "plan_name": request.form.get("plan_name"),
+            "plan_description": request.form.get("plan_description"),
+            "is_urgent": is_urgent,
+            "end_date": request.form.get("end_date"),
+            "created_by": session["user"]
+            }
+            
+        mongo.db.plans.update({"_id": ObjectId(dash_id)}, submit)
+        flash("Plan Successfuly Updated!")
+
     dash = mongo.db.plans.find_one({"_id": ObjectId(dash_id)})
     sections = mongo.db.sections.find().sort("section_name", 1)
     return render_template("edit_plan.html", dash=dash, sections=sections)
