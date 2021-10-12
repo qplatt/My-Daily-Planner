@@ -19,6 +19,12 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
+@app.route("/dashboard")
+def dashboard():
+    dashboard = list(mongo.db.plans.find())
+    return render_template("dashboard.html", dashboard=dashboard)
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
@@ -135,10 +141,11 @@ def edit_plan(dash_id):
     return render_template("edit_plan.html", dash=dash, sections=sections)
 
 
-@app.route("/dashboard")
-def dashboard():
-    dashboard = list(mongo.db.plans.find())
-    return render_template("dashboard.html", dashboard=dashboard)
+@app.route("/delete_plan/<dash_id>")
+def delete_plan(dash_id):
+    mongo.db.plans.remove({"_id": ObjectId(dash_id)})
+    flash("Succesfully Finished Plan")
+    return redirect(url_for("dashboard"))
 
 
 if __name__ == "__main__":
