@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text-darken-4 center-align">All Plans</h3>
+<h3 class="light-blue-text text-darken-4 center-align">All Plans</h3>
 
     <ul class="collapsible">
         {% for plan in plans %}
         <li>
-            <div class="collapsible-header white-text indigo accent-4 text-shadow">
+          <div class="collapsible-header white-text indigo accent-4 text-shadow">
                 <div class="col s3">
                     <i class="fas fa-caret-down"></i>
-                    <a href="" class="btn-small pink lighten-2">Done</a>
-                    <a href="" class="btn-small green lighten-3">Edit</a>
+                    <a href="" class="btn-small green accent-4">Done</a>
+                    <a href="{{ url_for('edit_plan', plan_id=plan._id) }}" class="btn-small indigo accent-4">Edit</a>
                 </div>
                 <div class="col s9">
-                    <strong>{{ plan.plan_name }}</strong> : {{ plan.due_date }}
+                    <strong>{{ plan.plan_name }}</strong> : {{ plan.end_date }}
                     {% if plan.is_urgent == "on" %}
-                        <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
+                    <i class="fas fa-exclamation-circle indigo-text text-accent-4 tooltipped"
                             data-position="right" data-tooltip="URGENT!"></i>
                     {% endif %}
                 </div>

@@ -59,12 +59,12 @@ def login():
         if existing_user:
             # ensure hashed password matches user input
             if check_password_hash(
-                existing_user["password"], request.form.get("password")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get("username")))
-                    return redirect(url_for(
-                        "profile", username=session["user"]))
+                    existing_user["password"], request.form.get("password")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Welcome, {}".format(
+                            request.form.get("username")))
+                        return redirect(url_for(
+                            "profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -72,7 +72,7 @@ def login():
 
         else:
             # username doesn't exist
-            flash("Incorrect Input")
+            flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
     return render_template("login.html")
@@ -110,13 +110,20 @@ def add_plan():
             "end_date": request.form.get("end_date"),
             "created_by": session["user"]
             }
-        
+
         mongo.db.plans.insert_one(plan)
         flash("Plan Successfuly Added!")
         return redirect(url_for("dashboard"))
 
     sections = mongo.db.sections.find().sort("section_name", 1)
     return render_template("add_plan.html", sections=sections)
+
+
+@app.route("/edit_plan/<plan_id>", methods=["GET", "POST"])
+def edit_plan(plan_id):
+    plan = mongo.db.plans.find_one({"_id": ObjectId(plan_id)})
+    sections = mongo.db.sections.find().sort("section_name", 1)
+    return render_template("edit_plan.html", plan=plan, sections=sections) 
 
 
 @app.route("/dashboard")
