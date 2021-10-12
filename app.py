@@ -148,6 +148,12 @@ def delete_plan(dash_id):
     return redirect(url_for("dashboard"))
 
 
+@app.route("/get_sections")
+def get_sections(): 
+    sections = list(mongo.db.sections.find().sort("section_name", 1))
+    return render_template("sections.html", sections=sections)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="indigo-text text-darken-4 center-align">Manage Sections</h3>
+
+    <div class="row">
+        {% for section in sections %}
+        <div class="col s12 m3">
+            <div class="card indigo accent-4 center-align">
+                <div class="card-content white-text">
+                    <span class="card-title">{{ section.section_name }}</span>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="btn pink lighten-4">Edit</a>
+                    <a href="#" class="btn pink lighten-4">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+
+{% endblock %}
