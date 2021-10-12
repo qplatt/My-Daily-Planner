@@ -119,11 +119,11 @@ def add_plan():
     return render_template("add_plan.html", sections=sections)
 
 
-@app.route("/edit_plan/<plan_id>", methods=["GET", "POST"])
-def edit_plan(plan_id):
-    plan = mongo.db.plans.find_one({"_id": ObjectId(plan_id)})
+@app.route("/edit_plan/<dash_id>", methods=["GET", "POST"])
+def edit_plan(dash_id):
+    dash = mongo.db.plans.find_one({"_id": ObjectId(dash_id)})
     sections = mongo.db.sections.find().sort("section_name", 1)
-    return render_template("edit_plan.html", plan=plan, sections=sections) 
+    return render_template("edit_plan.html", dash=dash, sections=sections)
 
 
 @app.route("/dashboard")
