@@ -25,6 +25,13 @@ def dashboard():
     return render_template("dashboard.html", dashboard=dashboard)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    dashboard = list(mongo.db.plans.find({"$text": {"$search": query}}))
+    return render_template("dashboard.html", dashboard=dashboard)
+
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
