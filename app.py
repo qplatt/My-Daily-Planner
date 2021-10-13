@@ -154,6 +154,19 @@ def get_sections():
     return render_template("sections.html", sections=sections)
 
 
+@app.route("/add_section", methods=["GET", "POST"])
+def add_section():
+    if request.method == "POST":
+        section = {
+            "section_name": request.form.get("section_name")
+        }
+        mongo.db.sections.insert_one(section)
+        flash("New Section Added")
+        return redirect(url_for("get_sections"))
+
+    return render_template("add_section.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
