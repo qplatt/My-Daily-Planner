@@ -167,6 +167,19 @@ def add_section():
     return render_template("add_section.html")
 
 
+@app.route("/edit_section/<section_id>", methods=["GET", "POST"])
+def edit_section(section_id): 
+    if request.method == "POST":
+        submit = {
+            "section_name": request.form.get("section_name")
+        }
+        mongo.db.sections.update({"_id": ObjectId(section_id)}, submit)
+        flash("Section Successfully Updated")
+        return redirect(url_for("get_sections"))
+    section = mongo.db.sections.find_one({"_id": ObjectId(section_id)})
+    return render_template("edit_section.html", section=section)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
